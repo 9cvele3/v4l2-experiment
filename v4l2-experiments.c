@@ -1,33 +1,3 @@
-
- /* Copyright (c) 2001 Fabrice Bellard
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- */
-
-/**
- * @file libavcodec video decoding API usage example
- * @example decode_video.c *
- *
- * Read from an MPEG1 video file, decode frames, and generate PGM images as
- * output.
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -96,13 +66,8 @@ int main(int argc, char **argv)
     int eof;
     AVPacket *pkt;
 
-    if (argc <= 2) {
-        fprintf(stderr, "Usage: %s <input file> <output file>\n"
-                "And check your input file is encoded by mpeg1video please.\n", argv[0]);
-        exit(0);
-    }
-    filename    = argv[1];
-    outfilename = argv[2];
+    filename    = "data/logo01.ts";
+    outfilename = "data/logo01-out.ts";
 
     pkt = av_packet_alloc();
     if (!pkt)
@@ -112,7 +77,7 @@ int main(int argc, char **argv)
     memset(inbuf + INBUF_SIZE, 0, AV_INPUT_BUFFER_PADDING_SIZE);
 
     /* find the MPEG-1 video decoder */
-    codec = avcodec_find_decoder(AV_CODEC_ID_MPEG1VIDEO);
+    codec = avcodec_find_decoder(AV_CODEC_ID_H264);
     if (!codec) {
         fprintf(stderr, "Codec not found\n");
         exit(1);

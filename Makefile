@@ -12,7 +12,9 @@ configure:
 					--disable-vdpau \
 					--disable-vaapi \
 					--disable-libdrm \
+					--enable-libv4l2 \
 					--enable-decoder=h264_v4l2m2m \
+					--enable-parser=h264 \
 					--enable-debug=2
 
 build-ffmpeg:
