@@ -34,7 +34,10 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt,
     while (ret >= 0) {
         ret = avcodec_receive_frame(dec_ctx, frame);
         if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
+        {
+            fprintf(stderr, "EAGAIN or EOF\n");
             return;
+        }
         else if (ret < 0) {
             fprintf(stderr, "Error during decoding\n");
             exit(1);
