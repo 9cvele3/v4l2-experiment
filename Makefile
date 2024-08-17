@@ -8,6 +8,7 @@ v4l2-experiments: v4l2-experiments.c
 configure:
 	cd FFmpeg && \
 		./configure --disable-everything \
+					--disable-asm \
 					--disable-x86asm \
 					--disable-vdpau \
 					--disable-vaapi \
