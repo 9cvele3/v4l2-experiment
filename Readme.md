@@ -1,3 +1,5 @@
+```apt-get install libv4l-dev```
+
 What is DRM on linux ? 
 
 ```v4l2_m2m``` will try to use /dev/video*
