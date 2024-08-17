@@ -6,4 +6,16 @@ v4l2-experiments: v4l2-experiments.c
 							-o $@
 
 configure:
-	cd FFmpeg && ./configure --disable-x86asm --enable-debug=2
+	cd FFmpeg && \
+		./configure --disable-everything \
+					--disable-x86asm \
+					--disable-vdpau \
+					--disable-vaapi \
+					--disable-libdrm \
+					--enable-decoder=h264_v4l2m2m \
+					--enable-debug=2
+
+build-ffmpeg:
+	cd FFmpeg && make -j4
+
+
