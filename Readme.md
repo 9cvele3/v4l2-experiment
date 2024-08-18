@@ -10,4 +10,7 @@ Test on jetson, patch ffmpeg to take /dev/nvdec into account.
 
 Can I test this on raspberry pi ? 
 
+Jetson: ioctl VIDIOC_QUERYCAP fails
+
+
 

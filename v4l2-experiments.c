@@ -22,6 +22,7 @@ static void pgm_save(unsigned char *buf, int wrap, int xsize, int ysize,
 static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt,
                    const char *filename)
 {
+    static int frame_number = 0;
     char buf[1024];
     int ret;
 
@@ -43,12 +44,13 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt,
             exit(1);
         }
 
-        printf("saving frame %3"PRId64"\n", dec_ctx->frame_number);
+	frame_number++;
+        printf("saving frame %3"PRId64"\n", frame_number);
         fflush(stdout);
 
         /* the picture is allocated by the decoder. no need to
            free it */
-        snprintf(buf, sizeof(buf), "%s-%"PRId64, filename, dec_ctx->frame_number);
+        snprintf(buf, sizeof(buf), "%s-%"PRId64, filename, frame_number);
         pgm_save(frame->data[0], frame->linesize[0],
                  frame->width, frame->height, buf);
     }
@@ -71,6 +73,8 @@ int main(int argc, char **argv)
 
     filename    = "data/logo01.ts";
     outfilename = "data/logo01-out.ts";
+
+    av_log_set_level(AV_LOG_DEBUG);
 
     pkt = av_packet_alloc();
     if (!pkt)
